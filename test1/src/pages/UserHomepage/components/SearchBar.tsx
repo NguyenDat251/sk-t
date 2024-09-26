@@ -1,15 +1,14 @@
 // src/components/SearchBar.tsx
 import React, { useState, ChangeEvent } from 'react';
-import { handleFetchUsers } from 'store/actions/userActions';
+import { handleDebouceFetchUsers } from 'store/actions/userActions';
 
 const SearchBar: React.FC = () => {
   const [query, setQuery] = useState<string>('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    console.log("🚀 ~ handleChange ~ value:", value)
     setQuery(value);
-    handleFetchUsers(value);
+    handleDebouceFetchUsers(value);
   };
 
   return (
