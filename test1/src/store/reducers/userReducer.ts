@@ -1,33 +1,46 @@
 // src/reducers/userReducer.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchUsers } from '../actions/userActions';
+import { fetchUsers, UserPayload } from '../actions/userActions';
+import {User} from 'types/user';
 
 interface UserState {
   loading: boolean;
-  users: any[];
+  users: User[];
   error: string | null;
+  cache: Record<string, User[]>;
 }
 
 const initialState: UserState = {
   loading: false,
   users: [],
   error: null,
+  cache: {},
 };
 
 // Create a slice
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    //update user list action
+    updateUsers: (state, action: PayloadAction<User[]>) => {
+      state.users = action.payload;
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchUsers.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchUsers.fulfilled, (state, action: PayloadAction<any[]>) => {
+      .addCase(fetchUsers.fulfilled, (state, action: PayloadAction<UserPayload>) => {
         state.loading = false;
-        state.users = action.payload;
+        state.users = action.payload.users;
+        state.cache = {
+          ...state.cache,
+          [action.payload.query]: action.payload.users,
+        };
       })
       .addCase(fetchUsers.rejected, (state, action: PayloadAction<any>) => {
         state.loading = false;
@@ -37,5 +50,6 @@ const userSlice = createSlice({
   },
 });
 
+export const { updateUsers } = userSlice.actions;
 export const userSelector = (state: { user: UserState }) => state.user;
 export default userSlice.reducer;

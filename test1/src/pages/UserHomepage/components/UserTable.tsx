@@ -24,7 +24,7 @@ const UserTable: React.FC = () => {
         {!error && (
           <tbody>
             {users.map((user) => (
-              <tr key={user.id} className="text-center">
+              <tr key={user.login} className="text-center">
                 <td className="py-2">
                   <img
                     src={user.avatar_url}
