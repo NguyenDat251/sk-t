@@ -1,16 +1,22 @@
 // src/components/UserTable.tsx
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from 'store'; // Adjust the import path if necessary
+import { useAppDispatch } from 'store'; // Adjust the import path if necessary
 import { fetchUsers } from 'store/actions/userActions'; // Adjust the import path if necessary
+import {userSelector} from 'store/reducers/userReducer'; // Adjust the import path if necessary
 
 const UserTable: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { users, loading } = useSelector((state: RootState) => state.user);
+  const { users, loading } = useSelector(userSelector);
+  console.log("🚀 ~ users:", users)
 
   useEffect(() => {
-    dispatch(fetchUsers('exampleQuery')); // Dispatch the action with a query parameter
+    dispatch(fetchUsers('dat')); // Dispatch the action with a query parameter
   }, [dispatch]);
+
+  useEffect(() => {
+    console.log('abc')
+  })
 
   if (loading) {
     return <div className="text-center">Loading...</div>;

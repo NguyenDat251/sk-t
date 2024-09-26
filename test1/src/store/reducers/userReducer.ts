@@ -32,4 +32,5 @@ const userSlice = createSlice({
 });
 
 export const { fetchUsersRequest, fetchUsersSuccess, fetchUsersFailure } = userSlice.actions;
+export const userSelector = (state: { user: UserState }) => state.user;
 export default userSlice.reducer;
