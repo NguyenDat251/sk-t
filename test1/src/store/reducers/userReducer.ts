@@ -1,6 +1,6 @@
 // src/reducers/userReducer.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchUsers, UserPayload } from '../actions/userActions';
+import { fetchUsersAction, UserPayload } from '../actions/userActions';
 import {User} from 'types/user';
 
 interface UserState {
@@ -30,11 +30,11 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUsers.pending, (state) => {
+      .addCase(fetchUsersAction.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchUsers.fulfilled, (state, action: PayloadAction<UserPayload>) => {
+      .addCase(fetchUsersAction.fulfilled, (state, action: PayloadAction<UserPayload>) => {
         state.loading = false;
         state.users = action.payload.users;
         state.cache = {
@@ -42,7 +42,7 @@ const userSlice = createSlice({
           [action.payload.query]: action.payload.users,
         };
       })
-      .addCase(fetchUsers.rejected, (state, action: PayloadAction<any>) => {
+      .addCase(fetchUsersAction.rejected, (state, action: PayloadAction<any>) => {
         state.loading = false;
         state.error = action.payload;
         state.users = [];
