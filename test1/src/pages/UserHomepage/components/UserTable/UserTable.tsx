@@ -1,18 +1,18 @@
 // src/components/UserTable.tsx
 import React from "react";
-import { useSelector } from "react-redux";
-import { userSelector } from "store/reducers/userReducer"; // Adjust the import path if necessary
+import { User } from "types/user";
 
-const UserTable: React.FC = () => {
-  const { users, loading, error } = useSelector(userSelector);
+interface UserTableProps {
+  users: User[];
+  loading: boolean;
+  error: string | null;
+}
 
-  if (loading) {
-    return <div className="text-center">Loading...</div>;
-  }
 
+const UserTable: React.FC<UserTableProps> = ({users, loading, error}) => {
   return (
     <>
-      <table className="min-w-full bg-white">
+      <table className="min-w-full bg-white" data-testId="user-table">
         <thead>
           <tr>
             <th className="py-2">Avatar</th>
@@ -41,11 +41,14 @@ const UserTable: React.FC = () => {
           </tbody>
         )}
       </table>
+      {loading && <div className="text-center">Loading...</div>}
+
       {error && (
         <div className="text-center text-red-500 w-full">
           Something went wrong
         </div>
       )}
+
     </>
   );
 };

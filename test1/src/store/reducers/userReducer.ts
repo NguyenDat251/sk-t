@@ -33,6 +33,7 @@ const userSlice = createSlice({
       .addCase(fetchUsersAction.pending, (state) => {
         state.loading = true;
         state.error = null;
+        state.users= [];
       })
       .addCase(fetchUsersAction.fulfilled, (state, action: PayloadAction<UserPayload>) => {
         state.loading = false;
