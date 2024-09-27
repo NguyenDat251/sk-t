@@ -1,6 +1,7 @@
 // src/components/UserTable.tsx
 import React from "react";
 import { User } from "types/user";
+import Loading from "components/Loading";
 
 interface UserTableProps {
   users: User[];
@@ -8,8 +9,7 @@ interface UserTableProps {
   error: string | null;
 }
 
-
-const UserTable: React.FC<UserTableProps> = ({users, loading, error}) => {
+const UserTable: React.FC<UserTableProps> = ({ users, loading, error }) => {
   return (
     <>
       <table className="min-w-full bg-white" data-testid="user-table">
@@ -41,14 +41,15 @@ const UserTable: React.FC<UserTableProps> = ({users, loading, error}) => {
           </tbody>
         )}
       </table>
-      {loading && <div className="text-center">Loading...</div>}
+      <div className="mt-4">
+        {loading && <Loading classes="mx-auto" />}
 
-      {error && (
-        <div className="text-center text-red-500 w-full">
-          Something went wrong
-        </div>
-      )}
-
+        {error && (
+          <div className="text-center text-red-500 w-full">
+            Something went wrong
+          </div>
+        )}
+      </div>
     </>
   );
 };
