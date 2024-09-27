@@ -16,7 +16,7 @@ const SearchBar: React.FC<SearchBarProps> = ({handleRequestFetchingUser}) => {
 
   return (
     <input
-      data-testId="user-search-input"
+      data-testid="user-search-input"
       id="user-search"
       type="text"
       value={query}

@@ -12,7 +12,7 @@ interface UserTableProps {
 const UserTable: React.FC<UserTableProps> = ({users, loading, error}) => {
   return (
     <>
-      <table className="min-w-full bg-white" data-testId="user-table">
+      <table className="min-w-full bg-white" data-testid="user-table">
         <thead>
           <tr>
             <th className="py-2">Avatar</th>
