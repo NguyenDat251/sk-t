@@ -2,11 +2,12 @@
 import React from "react";
 import { User } from "types/user";
 import Loading from "components/Loading";
+import {getErrorMessage} from 'types/error';
 
 interface UserTableProps {
   users: User[];
   loading: boolean;
-  error: string | null;
+  error: Error | string | null;
 }
 
 const UserTable: React.FC<UserTableProps> = ({ users, loading, error }) => {
@@ -46,7 +47,7 @@ const UserTable: React.FC<UserTableProps> = ({ users, loading, error }) => {
 
         {error && (
           <div className="text-center text-red-500 w-full">
-            Something went wrong
+            {getErrorMessage(error)}
           </div>
         )}
       </div>

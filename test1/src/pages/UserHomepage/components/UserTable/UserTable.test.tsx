@@ -20,11 +20,16 @@ describe("UserTable", () => {
     expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
   });
 
-  test("displays error message when there is an error", () => {
+  test("displays Something went wrong error message when there is an error", () => {
     render(
-      <UserTable users={[]} loading={false} error="Something went wrong" />
+      <UserTable users={[]} loading={false} error={{message: 'random error'} as Error} />
     );
     expect(screen.getByText("Something went wrong")).toBeInTheDocument();
+  });
+
+  test("displays error message for the case query is shorter 3 characters", () => {
+    render(<UserTable users={[]} loading={false} error="Query must be at least 3 characters long" />);
+    expect(screen.getByText("Query must be at least 3 characters long")).toBeInTheDocument();
   });
 
   test("displays user data when not loading and no error", () => {
