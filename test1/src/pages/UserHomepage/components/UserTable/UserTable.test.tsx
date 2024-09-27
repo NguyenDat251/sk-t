@@ -37,4 +37,10 @@ describe("UserTable", () => {
     expect(screen.getByText("John Doe")).toBeInTheDocument();
     expect(screen.getByText("Jane Smith")).toBeInTheDocument();
   });
+
+  //no users found
+  test("displays no users found message when no users", () => {
+    render(<UserTable users={[]} loading={false} error={null} />);
+    expect(screen.getByText("No users found")).toBeInTheDocument();
+  });
 });

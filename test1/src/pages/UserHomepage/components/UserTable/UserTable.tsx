@@ -43,6 +43,10 @@ const UserTable: React.FC<UserTableProps> = ({ users, loading, error }) => {
         )}
       </table>
       <div className="mt-4">
+        {users.length === 0 && !loading && !error && (
+          <div className="text-center w-full">No users found</div>
+        )}
+
         {loading && <Loading classes="mx-auto" />}
 
         {error && (
