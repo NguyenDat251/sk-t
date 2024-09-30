@@ -22,7 +22,7 @@ const SearchBar: React.FC<SearchBarProps> = ({handleRequestFetchingUser}) => {
       value={query}
       onChange={handleChange}
       placeholder="Search GitHub users..."
-      className="p-2 border border-gray-300 rounded"
+      className="p-2 border border-gray-300 rounded bg-white/80"
     />
   );
 };
