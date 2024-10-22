@@ -22,6 +22,5 @@
     "baseUrl": "src"
   },
   "include": [
-    "src"
-, "../UserHomepage.t.tsx"  ]
+    "src" ]
 }

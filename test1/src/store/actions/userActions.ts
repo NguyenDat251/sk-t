@@ -38,7 +38,9 @@ const handleDebouceFetchUsers = debounce((query: string) => {
     return;
   }
 
-  store.dispatch(fetchUsersAction(query))
+  store.dispatch(fetchUsersAction(query)).then(res => console.log('result', res)).finally(() => {
+    console.log('fetching from api');
+  });
 }
 , 500);
 

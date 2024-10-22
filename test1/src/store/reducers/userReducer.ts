@@ -36,6 +36,7 @@ const userSlice = createSlice({
         state.users= [];
       })
       .addCase(fetchUsersAction.fulfilled, (state, action: PayloadAction<UserPayload>) => {
+        console.log('fulfilled');
         state.loading = false;
         state.users = action.payload.users;
         state.cache = {
